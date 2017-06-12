@@ -1,4 +1,7 @@
 ---
+- name: Create folder for neovim setting
+  file: path=~/.config/nvim state=directory
+
 - name: Create folder for vim-plug
   file: path=~/.local/share/nvim/site/autoload state=directory
 
