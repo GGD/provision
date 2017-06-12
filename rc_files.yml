@@ -1,0 +1,16 @@
+---
+- name: Create folder for Neovim rc
+  file: path=~/.local/config/nvim state=directory
+
+- name: Symlink Neovim rc
+  file: src=~/.dotfiles/nvimrc dest=~/.config/nvim/init.vim state=link
+
+- name: Symlink rc
+  file: src=~/.dotfiles/{{ item }} dest=~/.{{ item }} state=link
+  with_items:
+    - ctags
+    - gemrc
+    - irbrc
+    - tmux.conf
+    - zshrc
+

@@ -1,0 +1,15 @@
+---
+- hosts: local
+  become_user: GGD
+  gather_facts: false
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - include: dotfiles.yml
+    - include: brew.yml
+    - include: oh-my-zsh.yml
+    - include: editor.yml
+    - include: rc_files.yml
+    - include: ruby.yml

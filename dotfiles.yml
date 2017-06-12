@@ -1,0 +1,9 @@
+---
+- name: Check if dotfiles folder is downloaded
+  stat: path=~/.dotfiles
+  register: dotfiles_downloaded
+
+
+- name: Download dotfiles
+  git: repo=https://github.com/GGD/dotfiles dest=~/.dotfiles
+  when: dotfiles_created == false

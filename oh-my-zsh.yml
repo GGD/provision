@@ -1,0 +1,8 @@
+---
+- name: Check oh-my-zsh is installed
+  stat: path=~/.oh-my-zsh
+  register: oh_my_zsh_installed
+
+- name: Install oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
+  when: oh_my_zsh_installed == false

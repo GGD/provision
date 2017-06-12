@@ -1,0 +1,18 @@
+- name: Check if rbenv-ctags is installed
+  stat: path=~/.rbenv/plugins/rbenv-ctags
+  register: rbenv_ctags_installed
+
+- name: Install rbenv-ctags
+  git: repo=https://github.com/tpope/rbenv-ctags.git dest=~/.rbenv/plugins/rbenv-ctags
+  when: rbenv_ctags_installed == false
+
+- name: Check if ruby is installed
+  shell: rbenv versions | grep {{ ruby_version }}
+  register: ruby_is_installed
+
+- name: Install ruby
+  command: rbenv install {{ ruby_version }}
+  when: ruby_is_installed is not defined 
+
+- name: Install bundler
+  command: gem install bundler
