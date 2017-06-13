@@ -9,6 +9,7 @@
   file: src=~/.dotfiles/{{ item }} dest=~/.{{ item }} state=link
   with_items:
     - ctags
+    - fzf.zsh
     - gemrc
     - irbrc
     - tmux.conf
