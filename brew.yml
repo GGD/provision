@@ -2,5 +2,8 @@
 - name: Tap Brewfile
   homebrew_tap: name=homebrew/bundle
 
+- name: Update brew
+  shell: brew update
+
 - name: Install Brewfile
   shell: cd ~/.dotfiles; brew bundle
