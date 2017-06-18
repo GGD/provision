@@ -4,7 +4,7 @@
 
 - name: Install rbenv-ctags
   git: repo=https://github.com/tpope/rbenv-ctags.git dest=~/.rbenv/plugins/rbenv-ctags
-  when: rbenv_ctags_installed == false
+  when: rbenv_ctags_installed.islnk is not defiled
 
 - name: Check if ruby is installed
   shell: rbenv versions | grep {{ ruby_version }}
