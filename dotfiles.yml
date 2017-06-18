@@ -6,4 +6,4 @@
 
 - name: Download dotfiles
   git: repo=https://github.com/GGD/dotfiles dest=~/.dotfiles
-  when: dotfiles_downloaded == false
+  when: dotfiles_downloaded.islnk is not defined
