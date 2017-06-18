@@ -9,10 +9,14 @@
 - name: Check if ruby is installed
   shell: rbenv versions | grep {{ ruby_version }}
   register: ruby_is_installed
+  ignore_errors: true
 
 - name: Install ruby
   command: rbenv install {{ ruby_version }}
-  when: ruby_is_installed is not defined 
+  when: ruby_is_installed | failed
+
+- name: Set global ruby
+  command: rbenv global {{ ruby_version }}
 
 - name: Install bundler
   command: gem install bundler
