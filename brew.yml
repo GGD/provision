@@ -5,6 +5,9 @@
 - name: Tap cask
   homebrew_tap: name=caskroom/cask
 
+- name: Tap cask/version to install previous version apps
+  homebrew_tap: name=caskroom/versions
+
 - name: Tap Brewfile
   homebrew_tap: name=homebrew/bundle
 
