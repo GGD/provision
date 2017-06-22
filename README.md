@@ -1,21 +1,4 @@
-## Requirement
-
-Install homebrew
+run following script in command line:
 ```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-Install Git
-```
-brew install git
-```
-
-Install Ansible
-```
-brew install ansible
-```
-
-Run Ansible playbook
-```
-ansible-playbook mac.yml
+sh provision.sh
 ```
