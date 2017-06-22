@@ -1,3 +1,5 @@
+#!/bin/sh
+
 which -s brew
 if [[ $? != 0 ]] ; then
   echo "Installing Homebrew..."
@@ -25,4 +27,6 @@ else
   brew upgrade ansible
 fi
 
+git clone git@github.com:GGD/provision ~/.provision
+cd ~/.provision
 ansible-playbook mac.yml

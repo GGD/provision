@@ -6,17 +6,21 @@
   git: repo=https://github.com/tpope/rbenv-ctags.git dest=~/.rbenv/plugins/rbenv-ctags
   when: rbenv_ctags_installed.islnk is not defiled
 
-- name: Check if ruby is installed
-  shell: rbenv versions | grep {{ ruby_version }}
+- name: Get latest Ruby version
+  shell: rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
+  register: ruby_version
+
+- name: Check if latest Ruby is installed
+  shell: rbenv versions | grep {{ ruby_version.stdout }}
   register: ruby_is_installed
   ignore_errors: true
 
-- name: Install ruby
-  command: rbenv install {{ ruby_version }}
+- name: Install latest Ruby
+  command: rbenv install {{ ruby_version.stdout }}
   when: ruby_is_installed | failed
 
-- name: Set global ruby
-  command: rbenv global {{ ruby_version }}
+- name: Set global Ruby
+  command: rbenv global {{ ruby_version.stdout }}
 
 - name: Install bundler
   command: gem install bundler
