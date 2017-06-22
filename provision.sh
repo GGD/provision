@@ -1,5 +1,11 @@
 #!/bin/sh
 
+fancy_echo() {
+  local fmt="$1"; shift
+
+  printf "\n$fmt\n" "$@"
+}
+
 which -s brew
 if [[ $? != 0 ]] ; then
   echo "Installing Homebrew..."
@@ -18,15 +24,66 @@ else
   brew upgrade git
 fi
 
-which -s ansible
-if [[ $? != 0 ]] ; then
-  echo "Installing Ansible..."
-  brew install ansible
-else
-  echo "Ansible installed, updating..."
-  brew upgrade ansible
+if [ ! -d "$HOME/.dotfiles/" ]; then
+  git clone git@github.com:GGD/dotfiles ~/.dotfiles
 fi
 
-git clone git@github.com:GGD/provision ~/.provision
-cd ~/.provision
-ansible-playbook mac.yml
+fancy_echo "Updating Homebrew formulae ..."
+brew tap caskroom/cask
+brew tap caskroom/versions
+brew tap homebrew/bundle
+cd ~/.dotfiles; brew bundle
+
+if [ ! -d "$HOME/.oh-my-zsh/" ]; then
+  git clone git@github.com:robbyrussell/oh-my-zsh ~/.oh-my-zsh
+fi
+
+if [ ! -d "$HOME/.config/nvim/" ]; then
+  mkdir "$HOME/.config/nvim"
+fi
+
+if [ ! -d "$HOME/.local/share/nvim/site/autoload/" ]; then
+  mkdir "$HOME/.local/share/nvim/site/autoload"
+fi
+
+if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+  curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -o ~/.local/share/nvim/site/autoload/plug.vim
+fi
+nvim --headless -c PlugInstall -c qa
+
+if [ ! -d "$HOME/.local/config/nvim/" ]; then
+  mkdir "$HOME/.local/config/nvim"
+fi
+
+ln -s ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
+ln -s ~/.dotfiles/ctags ~/.ctags
+ln -s ~/.dotfiles/fzf.zsh ~/.fzf.zsh
+ln -s ~/.dotfiles/gemrc ~/.gemrc
+ln -s ~/.dotfiles/gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/irbrc ~/.irbrc
+ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -s ~/.dotfiles/zshrc ~/.zshrc
+
+if [ ! -d "$HOME/.rbenv/plugins/rbenv-ctags/" ]; then
+  git clone git@github.com:tpope/rbenv-ctags ~/.rbenv/plugins/rbenv-ctags
+fi
+
+fancy_echo "Configuring Ruby ..."
+find_latest_ruby() {
+  rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
+}
+
+ruby_version="$(find_latest_ruby)"
+if ! rbenv versions | grep -Fq "$ruby_version"; then
+  RUBY_CONFIGURE_OPTS=--with-openssl-dir=/usr/local/opt/openssl rbenv install -s "$ruby_version"
+fi
+rbenv global "$ruby_version"
+
+gem_install_or_update() {
+  if gem list "$1" --installed > /dev/null; then
+    gem update "$@"
+  else
+    gem install "$@"
+  fi
+}
+gem_install_or_update "bundler"
