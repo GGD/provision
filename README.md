@@ -14,3 +14,8 @@ Install Ansible
 ```
 brew install ansible
 ```
+
+Run Ansible playbook
+```
+ansible-playbook mac.yml
+```
