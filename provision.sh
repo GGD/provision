@@ -22,6 +22,15 @@ if [ ! -d "$HOME/.dotfiles/" ]; then
   git clone git@github.com:GGD/dotfiles ~/.dotfiles
 fi
 
+echo "Updating Homebrew formula ..."
+brew tap caskroom/cask
+brew tap caskroom/versions
+brew tap homebrew/bundle
+cd ~/.dotfiles; brew bundle
+
+echo "Install zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 ln -s ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
 ln -s ~/.dotfiles/ctags ~/.ctags
 ln -s ~/.dotfiles/fzf.zsh ~/.fzf.zsh
@@ -32,15 +41,7 @@ ln -s ~/.dotfiles/irbrc ~/.irbrc
 ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/zshrc ~/.zshrc
 
-echo "Updating Homebrew formula ..."
-brew tap caskroom/cask
-brew tap caskroom/versions
-brew tap homebrew/bundle
-cd ~/.dotfiles; brew bundle
-
-if [ ! -d "$HOME/.oh-my-zsh/" ]; then
-  git clone git@github.com:robbyrussell/oh-my-zsh ~/.oh-my-zsh
-fi
+source ~/.zshrc
 
 if [ ! -d "$HOME/.config/" ]; then
   mkdir "$HOME/.config"
@@ -54,13 +55,17 @@ if [ ! -d "$HOME/.local/share/nvim/site/autoload/" ]; then
   mkdir "$HOME/.local/share/nvim/site/autoload"
 fi
 
+if [ ! -d "$HOME/.local/share/nvim/site/autoload/" ]; then
+  mkdir -p "$HOME/.local/share/nvim/site/autoload"
+fi
+
 if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
   curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -o ~/.local/share/nvim/site/autoload/plug.vim
 fi
 nvim --headless -c PlugInstall -c qa
 
 if [ ! -d "$HOME/.local/config/nvim/" ]; then
-  mkdir "$HOME/.local/config/nvim"
+  mkdir -p "$HOME/.local/config/nvim"
 fi
 
 if [ ! -d "$HOME/.rbenv/plugins/rbenv-ctags/" ]; then
