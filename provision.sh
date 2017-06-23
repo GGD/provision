@@ -22,6 +22,16 @@ if [ ! -d "$HOME/.dotfiles/" ]; then
   git clone git@github.com:GGD/dotfiles ~/.dotfiles
 fi
 
+ln -s ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
+ln -s ~/.dotfiles/ctags ~/.ctags
+ln -s ~/.dotfiles/fzf.zsh ~/.fzf.zsh
+ln -s ~/.dotfiles/gemrc ~/.gemrc
+ln -s ~/.dotfiles/gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/git_template ~/.git_template
+ln -s ~/.dotfiles/irbrc ~/.irbrc
+ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -s ~/.dotfiles/zshrc ~/.zshrc
+
 echo "Updating Homebrew formula ..."
 brew tap caskroom/cask
 brew tap caskroom/versions
@@ -30,6 +40,10 @@ cd ~/.dotfiles; brew bundle
 
 if [ ! -d "$HOME/.oh-my-zsh/" ]; then
   git clone git@github.com:robbyrussell/oh-my-zsh ~/.oh-my-zsh
+fi
+
+if [ ! -d "$HOME/.config/" ]; then
+  mkdir "$HOME/.config"
 fi
 
 if [ ! -d "$HOME/.config/nvim/" ]; then
@@ -48,15 +62,6 @@ nvim --headless -c PlugInstall -c qa
 if [ ! -d "$HOME/.local/config/nvim/" ]; then
   mkdir "$HOME/.local/config/nvim"
 fi
-
-ln -s ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
-ln -s ~/.dotfiles/ctags ~/.ctags
-ln -s ~/.dotfiles/fzf.zsh ~/.fzf.zsh
-ln -s ~/.dotfiles/gemrc ~/.gemrc
-ln -s ~/.dotfiles/gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/irbrc ~/.irbrc
-ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/zshrc ~/.zshrc
 
 if [ ! -d "$HOME/.rbenv/plugins/rbenv-ctags/" ]; then
   git clone git@github.com:tpope/rbenv-ctags ~/.rbenv/plugins/rbenv-ctags
