@@ -1,26 +1,20 @@
 #!/bin/sh
 
-fancy_echo() {
-  local fmt="$1"; shift
-
-  printf "\n$fmt\n" "$@"
-}
-
 which -s brew
 if [[ $? != 0 ]] ; then
-  echo "Installing Homebrew..."
+  echo "Installing Homebrew ..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
-  echo "Homebrew already installed, updating..."
+  echo "Homebrew already installed, updating ..."
   brew update
 fi
 
 which -s git
 if [[ $? != 0 ]] ; then
-  echo "Installing Git..."
+  echo "Installing Git ..."
   brew install git
 else
-  echo "Git installed, updating..."
+  echo "Git installed, updating ..."
   brew upgrade git
 fi
 
@@ -28,7 +22,7 @@ if [ ! -d "$HOME/.dotfiles/" ]; then
   git clone git@github.com:GGD/dotfiles ~/.dotfiles
 fi
 
-fancy_echo "Updating Homebrew formulae ..."
+echo "Updating Homebrew formula ..."
 brew tap caskroom/cask
 brew tap caskroom/versions
 brew tap homebrew/bundle
@@ -68,7 +62,7 @@ if [ ! -d "$HOME/.rbenv/plugins/rbenv-ctags/" ]; then
   git clone git@github.com:tpope/rbenv-ctags ~/.rbenv/plugins/rbenv-ctags
 fi
 
-fancy_echo "Configuring Ruby ..."
+echo "Configuring Ruby ..."
 find_latest_ruby() {
   rbenv install -l | grep -v - | tail -1 | sed -e 's/^ *//'
 }
