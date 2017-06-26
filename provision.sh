@@ -91,3 +91,4 @@ gem_install_or_update() {
   fi
 }
 gem_install_or_update "bundler"
+gem_install_or_update "gem-ctags"
