@@ -28,6 +28,18 @@ brew tap caskroom/versions
 brew tap homebrew/bundle
 cd ~/.dotfiles; brew bundle
 
+if [ ! -d "$HOME/.config/" ]; then
+  mkdir "$HOME/.config"
+fi
+
+if [ ! -d "$HOME/.config/nvim/" ]; then
+  mkdir "$HOME/.config/nvim"
+fi
+
+if [ ! -d "$HOME/.config/yarn/global" ]; then
+  mkdir -p "$HOME/.config/yarn/global"
+fi
+
 echo "Install zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
@@ -40,16 +52,9 @@ ln -s ~/.dotfiles/git_template ~/.git_template
 ln -s ~/.dotfiles/irbrc ~/.irbrc
 ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/zshrc ~/.zshrc
+ln -s ~/.dotfiles/package.json ~/.config/yarn/global/package.json
 
 source ~/.zshrc
-
-if [ ! -d "$HOME/.config/" ]; then
-  mkdir "$HOME/.config"
-fi
-
-if [ ! -d "$HOME/.config/nvim/" ]; then
-  mkdir "$HOME/.config/nvim"
-fi
 
 if [ ! -d "$HOME/.local/share/nvim/site/autoload/" ]; then
   mkdir "$HOME/.local/share/nvim/site/autoload"
