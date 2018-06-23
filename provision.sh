@@ -54,6 +54,10 @@ ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/zshrc ~/.zshrc
 ln -s ~/.dotfiles/package.json ~/.config/yarn/global/package.json
 
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/" ]; then
+  git clone https://github.com/zdharma/fast-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting
+fi
+
 source ~/.zshrc
 
 if [ ! -d "$HOME/.local/share/nvim/site/autoload/" ]; then
@@ -71,6 +75,15 @@ nvim --headless -c PlugInstall -c qa
 
 if [ ! -d "$HOME/.local/config/nvim/" ]; then
   mkdir -p "$HOME/.local/config/nvim"
+fi
+
+echo "Installing Tmux Plugin Manager..."
+if [ ! -d "$HOME/.tmux/plugins/" ]; then
+  mkdir -p "$HOME/.tmux/plugins"
+fi
+
+if [ ! -d "$HOME/.tmux/plugins/" ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 if [ ! -d "$HOME/.rbenv/plugins/rbenv-ctags/" ]; then
