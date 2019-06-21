@@ -58,6 +58,13 @@ if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/" ]; then
   git clone https://github.com/zdharma/fast-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting
 fi
 
+which -s nvm
+if [[ $? != 0 ]] ; then
+  echo "Installing nvm via zsh-nvm ..."
+  git clone https://github.com/lukechilds/zsh-nvm.git ~/.zsh-nvm
+fi
+
+
 source ~/.zshrc
 
 if [ ! -d "$HOME/.local/share/nvim/site/autoload/" ]; then
