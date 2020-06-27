@@ -40,8 +40,8 @@ if [ ! -d "$HOME/.config/yarn/global" ]; then
   mkdir -p "$HOME/.config/yarn/global"
 fi
 
-echo "Install zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+echo "Install Zinit"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 ln -s ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
 ln -s ~/.dotfiles/ctags ~/.ctags
@@ -53,10 +53,6 @@ ln -s ~/.dotfiles/irbrc ~/.irbrc
 ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/zshrc ~/.zshrc
 ln -s ~/.dotfiles/package.json ~/.config/yarn/global/package.json
-
-if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/" ]; then
-  git clone https://github.com/zdharma/fast-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting
-fi
 
 which -s nvm
 if [[ $? != 0 ]] ; then
