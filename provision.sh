@@ -23,8 +23,8 @@ if [ ! -d "$HOME/.dotfiles/" ]; then
 fi
 
 echo "Updating Homebrew formula ..."
-brew tap caskroom/cask
-brew tap caskroom/versions
+brew tap homebrew/cask
+brew tap homebrew/cask-versions
 brew tap homebrew/bundle
 cd ~/.dotfiles; brew bundle
 
