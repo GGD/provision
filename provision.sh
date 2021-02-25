@@ -43,6 +43,7 @@ fi
 echo "Install Zinit"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
+ln -sf ~/.dotfiles/p10k.zsh ~/.p10k.zsh
 ln -sf ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
 ln -sf ~/.dotfiles/ctags ~/.ctags
 ln -sf ~/.dotfiles/fzf.zsh ~/.fzf.zsh
