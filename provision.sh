@@ -43,16 +43,16 @@ fi
 echo "Install Zinit"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
-ln -s ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
-ln -s ~/.dotfiles/ctags ~/.ctags
-ln -s ~/.dotfiles/fzf.zsh ~/.fzf.zsh
-ln -s ~/.dotfiles/gemrc ~/.gemrc
-ln -s ~/.dotfiles/gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/git_template ~/.git_template
-ln -s ~/.dotfiles/irbrc ~/.irbrc
-ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/zshrc ~/.zshrc
-ln -s ~/.dotfiles/package.json ~/.config/yarn/global/package.json
+ln -sf ~/.dotfiles/nvimrc ~/.config/nvim/init.vim
+ln -sf ~/.dotfiles/ctags ~/.ctags
+ln -sf ~/.dotfiles/fzf.zsh ~/.fzf.zsh
+ln -sf ~/.dotfiles/gemrc ~/.gemrc
+ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/git_template ~/.git_template
+ln -sf ~/.dotfiles/irbrc ~/.irbrc
+ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/package.json ~/.config/yarn/global/package.json
 
 which -s nvm
 if [[ $? != 0 ]] ; then
